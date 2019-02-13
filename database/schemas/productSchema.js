@@ -1,5 +1,7 @@
 'use strict';
 
+const mongoose = require('mongoose')
+
 const Schema = mongoose.Schema
 
 module.exports.productSchema = new Schema({
@@ -15,11 +17,11 @@ module.exports.productSchema = new Schema({
   //Price
   Price: Number,
   PriceCompare: Number,
-  APK: Number,
+  //APK: Number,
 
   //Content
   Volume: Number,
-  Alcohol: Number,
+  Alcohol: String,
 
   //Assortment
   Assortment: String,
@@ -30,7 +32,7 @@ module.exports.productSchema = new Schema({
   //Make
   Producer: String,
   Supplier: String,
-  Area: String,  
+  Area: String,
   Country: String,
   Packaging: String,
   Year: Number,

@@ -6,14 +6,16 @@ const mongoose = require('mongoose')
 const Product = require('./models/product.js')
 
 //Connect to DB
-mongoose.connect(process.env.DB_URL);
+mongoose.connect(process.env.DB_URL, {
+  useNewUrlParser: true
+});
 
 //Functions
 module.exports = {
-  insert: async (modelName, payload) => {
+  insert: async (payload) => {
 
     //Create new instance of model
-    const model = new this[modelName](payload)
+    const model = new Product(payload)
 
     //Persist model
     await model.save()
