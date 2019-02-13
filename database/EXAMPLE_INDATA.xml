@@ -1,3 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<artiklar xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<skapad-tid>2019-02-13 07:10</skapad-tid>
+	<info>
+		<meddelande>Läs användarvillkoren på www.systembolaget.se. Nyheter efter 2016-11-03: Nytt fält: AssortmentText som förklarar med ord vad sortimentet är</meddelande>
+	</info>
 	<artikel>
 		<nr>7082701</nr>
 		<Artikelid>999533</Artikelid>
@@ -56,3 +62,4 @@
 		<Etiskt>0</Etiskt>
 		<Koscher>0</Koscher>
 	</artikel>
+</artiklar>
