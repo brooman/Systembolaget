@@ -2,4 +2,4 @@
 
 const productSchema = require('../schemas/productSchema');
 
-let Product = mongoose.model('Product', productSchema);
+module.exports.Product = mongoose.model('Product', productSchema);
