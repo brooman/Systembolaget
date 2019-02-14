@@ -13,8 +13,16 @@ const connection = mongoose.connect(process.env.DB_URL, {
 module.exports = {
 
   import: (item) => {
+    const query = {
+      ProductNumber: item.nr
+    }
 
-    const newProduct = new Product({
+    const config = {
+      upsert: true,
+      useFindAndModify: false
+    }
+
+    const data = {
       ProductNumber: item.nr,
       ProductNumberShort: item.Varnummer,
       ProductId: item.Artikelid,
@@ -52,12 +60,16 @@ module.exports = {
       Koscher: item.Koscher,
       Expired: item.Utgått,
       SaleStart: item.Saljstart
-    })
+    }
 
-    newProduct.save(function (err) {
-      if (err) throw err;
-
-      console.log('User created!');
+    Product.findOneAndUpdate(query, data, config, function (error, result) {
+      if (!error) {
+        if (!result) {
+          const result = new Product(data)
+        }
+        result.save().then(console.log('Added: ' +
+          data.ProductNumber))
+      }
     });
   }
 }
