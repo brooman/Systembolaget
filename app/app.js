@@ -27,7 +27,8 @@ app.get('/update', async function (req, res) {
 
   const data = await fetchJSON()
 
-  Object.keys(data).forEach(item => {
+  data.artiklar.artikel.forEach(item => {
+
     database.import(item);
   })
 
