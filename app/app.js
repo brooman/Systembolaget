@@ -23,6 +23,7 @@ app.get('/update', async function (req, res) {
           localeRange: 'åäö',
         })
       })
+      .catch(err => console.error(err));
   }
 
   const data = await fetchJSON()
