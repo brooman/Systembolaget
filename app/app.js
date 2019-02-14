@@ -3,35 +3,37 @@ require('dotenv').config()
 
 const express = require('express')
 const app = express()
-const database = require('../database/connection.js')
-const parser = require('fast-xml-parser')
-const fetch = require('node-fetch')
+const api = require('./api')
+const cron = require('node-cron');
 
 app.listen(process.env.PORT, () =>
   console.log(`Server started on http://localhost:${process.env.PORT} !`),
 )
 
-app.get('/', function (req, res) {})
+app.get('/', function (req, res) {
+  res.send('Front page')
+})
 
-app.get('/update', async function (req, res) {
+app.get('/api', function (req, res) {
+  res.send({
+    result: ""
+  })
+})
 
-  const fetchJSON = () => {
-    return fetch('https://www.systembolaget.se/api/assortment/products/xml')
-      .then(response => response.text())
-      .then(data => {
-        return parser.parse(data, {
-          localeRange: 'åäö',
-        })
-      })
-      .catch(err => console.error(err));
-  }
+if (process.env.UPDATE_MODE.toLowerCase() == "cron") {
+  cron.schedule(process.env.UPDATE_CRON, async () => {
 
-  const data = await fetchJSON()
+    console.log('Starting schedueled job')
 
-  data.artiklar.artikel.forEach(item => {
-
-    database.updateOrCreate(item);
+    api.refresh()
   })
 
-  res.send('Succesful')
-})
+}
+
+if (process.env.UPDATE_MODE.toLowerCase() == "manual") {
+  app.get(process.env.UPDATE_PATH, async (req, res) => {
+    api.refresh()
+
+    res.send('Updated');
+  })
+}
