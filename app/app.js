@@ -16,7 +16,7 @@ app.get('/', function (req, res) {})
 app.get('/update', async function (req, res) {
 
   const fetchJSON = () => {
-    return fetch('http://localhost:3000/data')
+    return fetch('https://www.systembolaget.se/api/assortment/products/xml')
       .then(response => response.text())
       .then(data => {
         return parser.parse(data, {
@@ -29,16 +29,8 @@ app.get('/update', async function (req, res) {
 
   data.artiklar.artikel.forEach(item => {
 
-    database.import(item);
+    database.updateOrCreate(item);
   })
 
   res.send('Succesful')
-})
-
-//Temp route
-app.get('/data', function (req, res) {
-  res.contentType('application/xml')
-  res.sendFile(
-    '/Users/laykith/Dropbox/public_html/yrgo/APK-Express/public/EXAMPLE_INDATA.xml',
-  )
 })
