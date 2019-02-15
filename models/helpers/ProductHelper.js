@@ -1,7 +1,7 @@
 module.exports = {
   builder: (item) => {
 
-    const data = {
+    return {
       ProductNumber: item.nr,
       ProductNumberShort: item.Varnummer,
       ProductId: item.Artikelid,
@@ -40,7 +40,5 @@ module.exports = {
       Expired: item.Utgått ? item.Utgått : false,
       SaleStart: item.Saljstart ? item.Saljstart : false
     }
-
-    return data
   }
 }

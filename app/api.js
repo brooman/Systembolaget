@@ -3,8 +3,8 @@
 const mongoose = require('mongoose')
 
 //Models
-const Product = require('../database/models/Product')
-const ProductHelper = require('../database/models/helpers/ProductHelper')
+const Product = require('../models/Product')
+const ProductHelper = require('../models/helpers/ProductHelper')
 
 const parser = require('fast-xml-parser')
 const fetch = require('node-fetch')
@@ -17,18 +17,15 @@ mongoose.connect(process.env.DB_URL, {
 
 module.exports = {
   updateData: async () => {
-    const fetchJSON = () => {
-      return fetch('https://www.systembolaget.se/api/assortment/products/xml')
-        .then(response => response.text())
-        .then(data => {
-          return parser.parse(data, {
-            localeRange: 'åäö',
-          })
-        })
-        .catch(err => console.error(err))
-    }
 
-    const data = await fetchJSON()
+    const data = await fetch('https://www.systembolaget.se/api/assortment/products/xml')
+      .then(response => response.text())
+      .then(data => {
+        return parser.parse(data, {
+          localeRange: 'åäö',
+        })
+      })
+      .catch(err => console.error(err))
 
     data.artiklar.artikel.forEach(item => {
 
@@ -48,10 +45,11 @@ module.exports = {
           console.log(err)
         }
       })
+
     })
+
   },
   fetchData: (params) => {
-    const data = Product.find(params)
-    return data
+    return Product.find(params)
   }
 }

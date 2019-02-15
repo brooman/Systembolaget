@@ -20,7 +20,7 @@ app.get('/api', async (req, res) => {
   res.send(data)
 })
 
-if (process.env.UPDATE_MODE.toLowerCase() == 'cron') {
+if (process.env.UPDATE_MODE.toLowerCase() == 'cron' || process.env.UPDATE_MODE.toLowerCase() == 'all') {
   cron.schedule(process.env.UPDATE_CRON, async () => {
     console.log('Starting schedueled job')
 
@@ -28,7 +28,7 @@ if (process.env.UPDATE_MODE.toLowerCase() == 'cron') {
   })
 }
 
-if (process.env.UPDATE_MODE.toLowerCase() == 'manual') {
+if (process.env.UPDATE_MODE.toLowerCase() == 'manual' | process.env.UPDATE_MODE.toLowerCase() == 'all') {
   app.get(process.env.UPDATE_PATH, async (req, res) => {
     api.updateData()
 
