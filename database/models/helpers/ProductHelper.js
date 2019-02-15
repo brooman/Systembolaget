@@ -12,7 +12,7 @@ module.exports = {
 
       //Price
       Price: item.Prisinklmoms ? item.Prisinklmoms : null,
-      PriceCompare: item.PrisPerLiter ? item.risPerLiter : null,
+      PriceCompare: item.PrisPerLiter ? item.PrisPerLiter : null,
       //APK: Number,
 
       //Content
@@ -41,6 +41,6 @@ module.exports = {
       SaleStart: item.Saljstart ? item.Saljstart : false
     }
 
-    return data;
+    return data
   }
 }
