@@ -1,4 +1,4 @@
-# Systembolaget API Facade
+# Systembolaget API Wrapper
 
 Express + MongoDB application to make working with Systembolagets public XML "API" a breeze.
 
