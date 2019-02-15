@@ -51,7 +51,7 @@ module.exports = {
     })
   },
   fetchData: (params) => {
-    Product.find(params)
+    const data = Product.find(params)
     return data
   }
 }
